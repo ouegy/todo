@@ -1,41 +1,22 @@
 import "./styles.css";
-import loadHome from "./home";
-import loadToday from "./today";
-import loadThisWeek from "./this-week";
+import loadHome from "./views/home";
+import loadToday from "./views/today";
+import loadThisWeek from "./views/this-week";
+import { replaceChildren } from "./controllers/UI";
 
 window.onload = (event) => {
     getTab();
     console.log("loaded");
 };
 
-function Project(title, description, dueDate, priority) {
-    this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
-    this.info = function () {
-        return {
-            title: title,
-            description: description,
-            dueDate: dueDate,
-            priority: priority,
-        };
-    };
-}
+// const defaultProject = new Project(
+//     "Default Project",
+//     "This is how the description is displayed",
+//     "Due Date",
+//     "Low"
+// );
 
-function Todo(title, description, dueDate, priority) {
-    this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
-}
-
-Object.setPrototypeOf(Todo.prototype, Project.prototype);
-
-function replaceChildren() {
-    const content = document.getElementById("main");
-    content.replaceChildren();
-}
+// Object.setPrototypeOf(Todo.prototype, Project.prototype);
 
 function createHeader(pageName) {
     const home = document.createElement("div");

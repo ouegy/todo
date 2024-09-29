@@ -1,4 +1,4 @@
-import { createElement, createImage, createHeader } from "./index.js";
+import { createElement, createImage, createHeader } from "../index.js";
 
 function createHome() {
     const home = createHeader("home");
