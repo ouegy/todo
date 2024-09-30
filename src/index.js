@@ -1,36 +1,60 @@
 import "./styles.css";
+import { loadForm } from "./views/form";
+import {
+    replaceChildren,
+    renderProjects,
+    displayForm,
+    closeForm,
+} from "./controllers/UI";
+import project from "./controllers/project";
 import loadHome from "./views/home";
 import loadToday from "./views/today";
 import loadThisWeek from "./views/this-week";
-import { replaceChildren, renderProjects, toggleForm } from "./controllers/UI";
-import { project } from "./controllers/project";
 import { task } from "./controllers/task";
 
 const projects = [];
 
-window.onload = (event) => {
-    getTab();
-    toggleForm();
-    console.log("loaded");
-};
+getTab();
+loadForm();
+displayForm();
+createProject();
+closeForm();
 
 const defaultProject = project(
     "Default Project",
     "This is how the project description is displayed",
-    "Due Date",
-    "Low"
+    "Due Date"
 );
 
-const defaultTask = new task(
+const defaultTask = task(
     "Default Task",
     "This is how the task description is displayed",
-    "Due Date",
-    "Low"
+    "Due Date"
 );
 
 projects.push(defaultProject);
-
 defaultProject.tasks.push(defaultTask);
+
+function createProject() {
+    const submit = loadForm();
+    console.log(submit);
+    submit.addEventListener("click", (e) => {
+        e.preventDefault();
+        console.log("clicked");
+        let title = document.getElementById("title").value;
+        let description = document.getElementById("description").value;
+        let date = document.getElementById("date").value;
+
+        const newProject = project(title, description, date);
+        addProject(newProject);
+        renderProjects();
+        return newProject;
+    });
+}
+
+function addProject(project) {
+    projects.push(project);
+}
 
 function getProjects() {
     console.table(projects);

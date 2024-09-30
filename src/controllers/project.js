@@ -1,9 +1,7 @@
-function project(title, description, dueDate, priority) {
+export default function project(title, description, dueDate) {
     const tasks = [];
     function getTasks() {
         return this.tasks;
     }
-    return { title, description, dueDate, priority, tasks, getTasks };
+    return { title, description, dueDate, tasks, getTasks };
 }
-
-export { project };

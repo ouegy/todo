@@ -1,5 +1,5 @@
-function task(title, dueDate) {
-    return { title, dueDate };
+function task(title, description, dueDate) {
+    return { title, description, dueDate };
 }
 
 export { task };

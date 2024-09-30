@@ -1,5 +1,4 @@
 import { getProjects, createElement } from "..";
-import { loadForm } from "../views/form";
 
 function replaceChildren() {
     const content = document.getElementById("main");
@@ -8,6 +7,7 @@ function replaceChildren() {
 
 function renderProjects() {
     const sidebarList = document.getElementById("projects");
+    sidebarList.replaceChildren();
     const projects = getProjects();
     projects.forEach((project) => {
         const ele = createElement("li", project.title, "project");
@@ -15,11 +15,23 @@ function renderProjects() {
     });
 }
 
-function toggleForm() {
+function displayForm() {
     const addProject = document.getElementById("add-project");
     addProject.addEventListener("click", () => {
-        const newForm = loadForm();
+        const newProject = document.getElementById("new-project");
+        newProject.classList.remove("hidden");
+        newProject.classList.add("fade-in");
     });
 }
 
-export { replaceChildren, renderProjects, toggleForm };
+function closeForm() {
+    const close = document.getElementById("close");
+    close.addEventListener("click", (e) => {
+        e.preventDefault;
+        console.log("clicked");
+        const newProject = document.getElementById("new-project");
+        newProject.classList.add("hidden");
+    });
+}
+
+export { replaceChildren, renderProjects, displayForm, closeForm };
