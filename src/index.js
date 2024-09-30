@@ -2,19 +2,48 @@ import "./styles.css";
 import loadHome from "./views/home";
 import loadToday from "./views/today";
 import loadThisWeek from "./views/this-week";
-import { replaceChildren } from "./controllers/UI";
+import { replaceChildren, renderProjects } from "./controllers/UI";
+import { project } from "./controllers/project";
+import { task } from "./controllers/task";
+
+const projects = [];
 
 window.onload = (event) => {
     getTab();
     console.log("loaded");
 };
 
-// const defaultProject = new Project(
-//     "Default Project",
-//     "This is how the description is displayed",
-//     "Due Date",
-//     "Low"
-// );
+const defaultProject = project(
+    "Default Project",
+    "This is how the project description is displayed",
+    "Due Date",
+    "Low"
+);
+
+const defaultTask = new task(
+    "Default Task",
+    "This is how the task description is displayed",
+    "Due Date",
+    "Low"
+);
+
+projects.push(defaultProject);
+
+defaultProject.tasks.push(defaultTask);
+
+function getProjects() {
+    console.table(projects);
+    return projects;
+}
+
+function getTasks(project) {
+    console.table(project.getTasks());
+    return project.tasks;
+}
+
+getProjects();
+getTasks(defaultProject);
+renderProjects();
 
 // Object.setPrototypeOf(Todo.prototype, Project.prototype);
 
@@ -73,4 +102,4 @@ function switchTab(tab) {
     }
 }
 
-export { createElement, createImage, createHeader };
+export { createElement, createImage, createHeader, getProjects, getTasks };
