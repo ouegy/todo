@@ -1,4 +1,5 @@
 import { getProjects, createElement } from "..";
+import { loadForm } from "../views/form";
 
 function replaceChildren() {
     const content = document.getElementById("main");
@@ -14,4 +15,11 @@ function renderProjects() {
     });
 }
 
-export { replaceChildren, renderProjects };
+function toggleForm() {
+    const addProject = document.getElementById("add-project");
+    addProject.addEventListener("click", () => {
+        const newForm = loadForm();
+    });
+}
+
+export { replaceChildren, renderProjects, toggleForm };

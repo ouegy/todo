@@ -2,7 +2,7 @@ import "./styles.css";
 import loadHome from "./views/home";
 import loadToday from "./views/today";
 import loadThisWeek from "./views/this-week";
-import { replaceChildren, renderProjects } from "./controllers/UI";
+import { replaceChildren, renderProjects, toggleForm } from "./controllers/UI";
 import { project } from "./controllers/project";
 import { task } from "./controllers/task";
 
@@ -10,6 +10,7 @@ const projects = [];
 
 window.onload = (event) => {
     getTab();
+    toggleForm();
     console.log("loaded");
 };
 
@@ -75,6 +76,7 @@ function getTab() {
     console.log(links);
     links.forEach((element) => {
         element.addEventListener("click", function (e) {
+            e.preventDefault();
             let tab = e.target.textContent;
             switchTab(tab);
         });
